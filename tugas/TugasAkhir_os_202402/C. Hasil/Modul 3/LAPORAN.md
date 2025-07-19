@@ -55,10 +55,10 @@ Read Count Setelah: 5
 
 ### 📸 Screenshot:
 **COW**
-![hasil ptest dan rtest](./screenshots/3A.png)
+![hasil cowtest](./screenshot/3A.png)
 
 **shm**
-![hasil ptest dan rtest](./screenshots/3B.png)
+![hasil shmtest](./screenshot/3B.png)
 ---
 
 ## ⚠️ Kendala yang Dihadapi

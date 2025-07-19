@@ -46,10 +46,13 @@ Modul 4 – Subsistem Kernel Alternatif (xv6-public)
 ## 📷 Hasil Uji
 
 ### 📍 Contoh Output `chmodtest`:
+Write blocked as expected
 
+### 📍 Contoh Output `randomtest`:
+19 45 232 11 89 77 254 1
 
 ### 📸 Screenshot:
-![hasil ptest dan rtest](./screenshots/4.png)
+![hasil chmodtest dan randomtest](./screenshot/4.png)
 
 ---
 

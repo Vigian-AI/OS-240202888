@@ -60,7 +60,7 @@ Access denied or error.
 
 ### 📸 Screenshot:
 
-![hasil ptest dan rtest](./screenshots/5.png)
+![hasil ](./screenshot/5.png)
 
 ---
 

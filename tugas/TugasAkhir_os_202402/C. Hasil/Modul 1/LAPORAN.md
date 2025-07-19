@@ -57,7 +57,7 @@ Read Count Setelah: 5
 ```
 
 ### 📸 Screenshot:
-![hasil ptest dan rtest](./screenshots/1.png)
+![hasil ptest dan rtest](./screenshot/1.png)
 ---
 
 ## ⚠️ Kendala yang Dihadapi
