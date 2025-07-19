@@ -49,6 +49,7 @@ struct proc {
   struct file *ofile[NOFILE];  // Open files
   struct inode *cwd;           // Current directory
   char name[16];               // Process name (debugging)
+
 };
 
 // Process memory is laid out contiguously, low addresses first:
@@ -56,3 +57,10 @@ struct proc {
 //   original data and bss
 //   fixed-size stack
 //   expandable heap
+#define MAX_PROC 64 //vigi1
+
+struct pinfo {//vigi1
+  int pid[MAX_PROC];
+  int mem[MAX_PROC];
+  char name[MAX_PROC][16];
+};
