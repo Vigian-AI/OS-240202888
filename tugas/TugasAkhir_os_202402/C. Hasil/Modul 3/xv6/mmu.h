@@ -1,3 +1,5 @@
+#ifndef MMU_H
+#define MMU_H
 // This file contains definitions for the
 // x86 memory management unit (MMU).
 
@@ -91,6 +93,7 @@ struct segdesc {
 #define PGROUNDDOWN(a) (((a)) & ~(PGSIZE-1))
 
 // Page table/directory entry flags.
+#define PTE_COW 0x200  // custom flag untuk CoW
 #define PTE_P           0x001   // Present
 #define PTE_W           0x002   // Writeable
 #define PTE_U           0x004   // User
@@ -178,4 +181,5 @@ struct gatedesc {
   (gate).off_31_16 = (uint)(off) >> 16;                  \
 }
 
+#endif
 #endif

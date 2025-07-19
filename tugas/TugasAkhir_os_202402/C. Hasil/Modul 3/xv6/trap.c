@@ -36,6 +36,32 @@ idtinit(void)
 void
 trap(struct trapframe *tf)
 {
+ if(tf->trapno == T_PGFLT){
+    uint va = rcr2();
+    struct proc *p = myproc();
+
+    pte_t *pte = walkpgdir(p->pgdir, (void*)va, 0);
+
+    if(!pte || !(*pte & PTE_P) || !(*pte & PTE_COW)){
+      cprintf("Invalid page fault at %x\n", va);
+      kill(p->pid);
+      return;
+    }
+    uint pa = PTE_ADDR(*pte);
+    char *mem = kalloc();
+    if(mem == 0){
+      cprintf("kalloc failed\n");
+      kill(p->pid);
+      return;
+    }
+    memmove(mem, (char*)P2V(pa), PGSIZE);
+    decref((char*)P2V(pa));
+    *pte = V2P(mem) | PTE_W | PTE_U | PTE_P;
+    *pte &= ~PTE_COW;
+    lcr3(V2P(p->pgdir)); // Flush TLB
+    return;
+  }
+      
   if(tf->trapno == T_SYSCALL){
     if(myproc()->killed)
       exit();

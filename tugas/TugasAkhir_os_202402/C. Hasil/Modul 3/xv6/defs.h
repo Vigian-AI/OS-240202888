@@ -1,3 +1,6 @@
+
+#include "mmu.h"
+
 struct buf;
 struct context;
 struct file;
@@ -181,10 +184,16 @@ void            freevm(pde_t*);
 void            inituvm(pde_t*, char*, uint);
 int             loaduvm(pde_t*, char*, struct inode*, uint, uint);
 pde_t*          copyuvm(pde_t*, uint);
+
 void            switchuvm(struct proc*);
 void            switchkvm(void);
 int             copyout(pde_t*, uint, void*, uint);
 void            clearpteu(pde_t *pgdir, char *uva);
 
+pde_t* cowuvm(pde_t *pgdir, uint sz);
+pte_t* walkpgdir(pde_t *pgdir, const void *va, int alloc);
+void incref(char *pa);
+void decref(char *pa);
+int  mappages(pde_t *pgdir, void *va, uint size, uint pa, int perm);
 // number of elements in fixed-size array
 #define NELEM(x) (sizeof(x)/sizeof((x)[0]))
