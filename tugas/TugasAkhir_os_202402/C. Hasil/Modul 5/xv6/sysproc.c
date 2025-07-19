@@ -6,6 +6,28 @@
 #include "memlayout.h"
 #include "mmu.h"
 #include "proc.h"
+#include "audit_common.c"
+
+
+extern struct audit_entry audit_log[];
+extern int audit_index;
+
+int sys_get_audit_log(void) {
+  char *buf;
+  int max;
+  struct proc *curproc =myproc();
+
+  if (argptr(0, &buf, sizeof(struct audit_entry) * MAX_AUDIT) < 0 || argint(1, &max) < 0)
+    return -1;
+
+  if (curproc->pid != 1)
+    return -1;
+
+  int n = (audit_index < max) ? audit_index : max;
+  memmove(buf, audit_log, n * sizeof(struct audit_entry));
+
+  return n;
+}
 
 int
 sys_fork(void)
