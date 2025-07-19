@@ -10,7 +10,15 @@
 #include "sleeplock.h"
 #include "file.h"
 
-struct devsw devsw[NDEV];
+extern int randomread(struct inode*, char*, int);
+extern int consoleread(struct inode*, char*, int);
+extern int consolewrite(struct inode*, char*, int);
+
+struct devsw devsw[] = {
+  [CONSOLE]  { consoleread, consolewrite }, 
+  [3]        { randomread, 0 },             
+
+
 struct {
   struct spinlock lock;
   struct file file[NFILE];
@@ -139,6 +147,9 @@ filewrite(struct file *f, char *addr, int n)
 
       begin_op();
       ilock(f->ip);
+      if(f->ip && f->ip->mode == 1){  
+        return -1;
+      }
       if ((r = writei(f->ip, addr + i, f->off, n1)) > 0)
         f->off += r;
       iunlock(f->ip);
@@ -154,4 +165,3 @@ filewrite(struct file *f, char *addr, int n)
   }
   panic("filewrite");
 }
-

@@ -22,6 +22,7 @@ OBJS = \
 	syscall.o\
 	sysfile.o\
 	sysproc.o\
+	random.o\
 	trapasm.o\
 	trap.o\
 	uart.o\
@@ -181,6 +182,8 @@ UPROGS=\
 	_usertests\
 	_wc\
 	_zombie\
+	_chmodtest\
+  	_randomtest\
 
 fs.img: mkfs README $(UPROGS)
 	./mkfs fs.img README $(UPROGS)

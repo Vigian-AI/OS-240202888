@@ -19,6 +19,8 @@ main(void)
   dup(0);  // stdout
   dup(0);  // stderr
 
+  mknod("random", 3, 0); 
+
   for(;;){
     printf(1, "init: starting sh\n");
     pid = fork();
@@ -34,4 +36,5 @@ main(void)
     while((wpid=wait()) >= 0 && wpid != pid)
       printf(1, "zombie!\n");
   }
+
 }

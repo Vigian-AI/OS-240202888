@@ -1,3 +1,6 @@
+#ifndef _FS_H_
+#define _FS_H_
+
 // On-disk file system format.
 // Both the kernel and user programs use this header file.
 
@@ -27,12 +30,14 @@ struct superblock {
 
 // On-disk inode structure
 struct dinode {
-  short type;           // File type
+  short type;
   short major;          // Major device number (T_DEV only)
   short minor;          // Minor device number (T_DEV only)
   short nlink;          // Number of links to inode in file system
   uint size;            // Size of file (bytes)
   uint addrs[NDIRECT+1];   // Data block addresses
+  short mode;        
+   char padding[62];
 };
 
 // Inodes per block.
@@ -55,3 +60,4 @@ struct dirent {
   char name[DIRSIZ];
 };
 
+#endif // _FS_H_
